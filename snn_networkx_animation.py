@@ -341,13 +341,18 @@ class SNNNetworkXAnimator:
         """애니메이션 생성 및 실행"""
         print("Creating NetworkX animation...")
         
-        ani = animation.FuncAnimation(self.fig, self.animate, frames=1000, 
-                                    interval=interval, blit=False, repeat=True)
-        
         if save_gif:
+            print("Creating GIF animation...")
+            # GIF용으로 프레임 수를 제한 (25개 타임스텝 * 2 사이클 = 50 프레임)
+            ani = animation.FuncAnimation(self.fig, self.animate, frames=50, 
+                                        interval=interval, blit=False, repeat=False)
             print("Saving animation as GIF...")
             ani.save('snn_networkx_animation.gif', writer='pillow', fps=2)
             print("Animation saved as 'snn_networkx_animation.gif'")
+        else:
+            # 실시간 애니메이션용 (무한 반복)
+            ani = animation.FuncAnimation(self.fig, self.animate, frames=1000, 
+                                        interval=interval, blit=False, repeat=True)
         
         plt.tight_layout()
         plt.show()
@@ -369,8 +374,8 @@ def main():
     animator = SNNNetworkXAnimator(net, sample_image, sample_label, 
                                  num_steps=hyperparams['num_steps'])
     
-    # 4. 애니메이션 실행 (무한 반복)
-    ani = animator.create_animation(interval=800, save_gif=False)
+    # 4. 애니메이션 실행 및 GIF 저장
+    ani = animator.create_animation(interval=800, save_gif=True)
     
     return ani
 
