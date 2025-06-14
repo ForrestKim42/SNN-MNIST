@@ -106,4 +106,4 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 
 ## 📞 Contact
 
-If you have any questions, feel free to reach out to [Your Name] at [Your Email Address].
+If you have any questions, feel free to reach out to me at humblefirm@gmail.com
